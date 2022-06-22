@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎注册</title>
+    <link href="../css/register.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="form-div">
+    <div class="reg-content">
+        <h1>欢迎注册</h1>
+        <span>已有帐号？</span> <a href="#">登录</a>
+    </div>
+    <form id="reg-form" action="#" method="get">
+
+        <table>
+
+            <tr>
+                <td>用户名</td>
+                <td class="inputs">
+                    <input name="username" onblur='checkAll("username",/^\w{6,12}$/)' type="text" id="username">
+                    <br>
+                    <span id="username_err" class="err_msg" style="display: none">用户名不太受欢迎2</span>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>密码</td>
+                <td class="inputs">
+                    <input name="password" type="password" id="password">
+                    <br>
+                    <span id="password_err" class="err_msg" style="display: none">密码格式有误2</span>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>手机号</td>
+                <td class="inputs"><input name="tel" type="text" id="tel">
+                    <br>
+                    <span id="tel_err" class="err_msg" style="display: none">手机号格式有误2</span>
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="buttons">
+            <input value="注 册" type="submit" id="reg_btn">
+        </div>
+        <br class="clear">
+    </form>
+
+</div>
+
+
+<script>
+    //1.2 绑定onblur事件 失去焦点   等号的右边是调用方法的形式,所以,在页面加载的时候,立刻就调用了方法,并将方法返回的结果赋值给了onblur事件,所以会
+    //导致页面加载的时候,立刻校验一次,后面就再也不执行了
+    //document.getElementById("username").onblur = checkAll("username",/^\w{6,12}$/);
+
+    //1.2 绑定onblur事件 失去焦点   给标签绑定了onblur事件,当事件触发的时候,会执行右边的匿名函数,在匿名函数中调用了我们自定义的checkAll方法
+    document.getElementById("password").onblur =function (){
+        checkAll("password",/^\w{6,12}$/);
+    };
+
+    document.getElementById("tel").onblur = function (){
+        checkAll("tel",/^[1][1234567890]{10}$/);
+    };
+
+    function checkAll(id,reg) {
+        //alert(id);
+        //1.3 获取用户输入的密码
+        var e = document.getElementById(id);
+        var password = e.value.trim();
+
+
+        var flag = reg.test(password);
+        //alert(flag);
+        //var flag = password.length >= 6 && password.length <= 12;
+        if (flag) {
+            //符合规则
+            document.getElementById(id+"_err").style.display = 'none';
+        } else {
+            //不合符规则
+            document.getElementById(id+"_err").style.display = '';
+        }
+
+        return flag;
+    }
+
+    //1. 获取表单对象
+    var regForm = document.getElementById("reg-form");
+
+    //2. 绑定onsubmit 事件
+    regForm.onsubmit = function () {
+        //挨个判断每一个表单项是否都符合要求，如果有一个不合符，则返回false
+
+        var flag = checkAll("username",/^\w{6,12}$/) && checkAll("tel",/^[1][1234567890]{10}$/) &&checkAll("password",/^\w{6,12}$/);
+
+        return flag;
+    }
+
+</script>
+</body>
+</html>

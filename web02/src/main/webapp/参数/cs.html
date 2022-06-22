@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习参数传递</title>
+</head>
+<body>
+<!--action需要写给服务器发请求时候的资源路径,由3部分组成:
+1: http://ip:端口   这部分可以省略不写
+2: 虚拟目录
+3: servlet映射路径-->
+    <!--<form method="get" action="http://127.0.0.1:80/w2/r2">-->
+    <form method="get" action="/w2/r2">  <!--由于虚拟目录配成了/ 所以省略了,第1部分也省略了,所以就只剩下servlet映射路径了-->
+        用户名: <input type="text" name="yonghuming">
+        <br>
+        爱好: <input type="checkbox" name="aihao" value="chang">唱
+        <input type="checkbox" name="aihao" value="tiao" checked>跳
+        <input type="checkbox" name="aihao" value="rap">rap
+        <input type="checkbox" name="aihao" value="lq" checked>篮球
+        <br>
+        <input type="submit" value="点我呀">
+    </form>
+</body>
+</html>
